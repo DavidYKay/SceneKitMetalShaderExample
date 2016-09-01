@@ -21,48 +21,26 @@ typedef struct {
     float3 position [[ attribute(SCNVertexSemanticPosition) ]];
 } MyVertexInput;
 
-struct Vertex
+struct SimpleVertex
 {
     float4 position [[position]];
-    float4 color;
 };
 
-struct Uniforms
-{
-    float4x4 modelViewProjectionMatrix;
-};
 
-vertex Vertex vertexProject(device Vertex *vertices [[buffer(0)]],
-        constant Uniforms *uniforms [[buffer(1)]],
-        uint vid [[vertex_id]])
+vertex SimpleVertex myVertex(MyVertexInput in [[ stage_in ]],
+                             constant SCNSceneBuffer& scn_frame [[buffer(0)]],
+                             constant MyNodeBuffer& scn_node [[buffer(1)]])
 {
-    Vertex vertexOut;
-    vertexOut.position = uniforms->modelViewProjectionMatrix *
-        vertices[vid].position;
-    vertexOut.color = vertices[vid].color;
-    return vertexOut;
+    SimpleVertex vert;
+    vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
+
+    return vert;
 }
 
-vertex Vertex vertexMain(device Vertex *vertices [[buffer(0)]], uint vid [[vertex_id]])
-{
-    return vertices[vid];
-}
-
-vertex float4 vertexBasic(                           // 1
-  const device packed_float3* vertex_array [[ buffer(0) ]], // 2
-  unsigned int vid [[ vertex_id ]]) {                 // 3
-  return float4(vertex_array[vid], 1.0);              // 4
-}
-
-fragment half4 myFragment(Vertex in [[stage_in]])
+fragment half4 myFragment(SimpleVertex in [[stage_in]])
 {
     half4 color;
     color = half4(1.0, 0.0, 0.0, 1.0);
 
     return color;
-}
-
-fragment half4 flatColor(Vertex vertexIn [[stage_in]])
-{
-    return half4(vertexIn.color);
 }

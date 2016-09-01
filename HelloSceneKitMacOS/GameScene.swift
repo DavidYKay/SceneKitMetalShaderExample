@@ -25,7 +25,7 @@ class GameScene: SCNScene {
         // let fragmentFunc = library.newFunctionWithName("flatColor")
         // program.vertexFunction = "vertexFunction"
         // program.fragmentFunction = fragmentFunction
-        program.vertexFunctionName = "vertexMain"
+        program.vertexFunctionName = "myVertex"
         program.fragmentFunctionName = "myFragment"
 
         let sphere = SCNSphere(radius: 1.0)
