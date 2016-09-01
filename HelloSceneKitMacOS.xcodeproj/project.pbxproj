@@ -13,6 +13,8 @@
 		42842D611D781C540075809C /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 42842D601D781C540075809C /* art.scnassets */; };
 		42842D631D781C540075809C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42842D621D781C540075809C /* Assets.xcassets */; };
 		42842D661D781C540075809C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42842D641D781C540075809C /* MainMenu.xib */; };
+		42842D6E1D781E4C0075809C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42842D6D1D781E4C0075809C /* GameScene.swift */; };
+		42842D701D781EE90075809C /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 42842D6F1D781EE90075809C /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		42842D621D781C540075809C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42842D651D781C540075809C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		42842D671D781C540075809C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42842D6D1D781E4C0075809C /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		42842D6F1D781EE90075809C /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				42842D621D781C540075809C /* Assets.xcassets */,
 				42842D641D781C540075809C /* MainMenu.xib */,
 				42842D671D781C540075809C /* Info.plist */,
+				42842D6D1D781E4C0075809C /* GameScene.swift */,
+				42842D6F1D781EE90075809C /* Shaders.metal */,
 			);
 			path = HelloSceneKitMacOS;
 			sourceTree = "<group>";
@@ -140,7 +146,9 @@
 			files = (
 				42842D5D1D781C540075809C /* GameView.swift in Sources */,
 				42842D5F1D781C540075809C /* GameViewController.swift in Sources */,
+				42842D6E1D781E4C0075809C /* GameScene.swift in Sources */,
 				42842D5B1D781C540075809C /* AppDelegate.swift in Sources */,
+				42842D701D781EE90075809C /* Shaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
