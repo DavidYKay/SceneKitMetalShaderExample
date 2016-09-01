@@ -36,13 +36,14 @@ class GameScene: SCNScene {
         let sphere = SCNSphere(radius: 1.0)
         //sphere.materials.first!.diffuse.contents = NSColor.redColor()
         
-        var accentColor = MyAccentColors(
-            primaryColor: vector_float4(0,1,0,1),
-            secondaryColor: vector_float4(0,1,0,1)
-        )
+//        var accentColor = MyAccentColors(
+//            primaryColor: vector_float4(0,1,0,1),
+//            secondaryColor: vector_float4(0,1,0,1)
+//        )
         var myColor = MyColor(
             //color: vector_float4(0,1,0,1)
-            color: vector_float4(0,0,1,1)
+            //color: vector_float4(0,0,1,1)
+            color: vector_float4(1,0,0,1)
         )
         let myData = NSData(bytes:&myColor, length:sizeof(MyColor))
         sphere.materials.first!.setValue(myData, forKey: "colors")
