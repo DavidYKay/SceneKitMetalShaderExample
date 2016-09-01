@@ -7,17 +7,19 @@
 //
 
 #include <metal_stdlib>
-#include "ShaderCommon.h"
 using namespace metal;
+#include <SceneKit/scn_metal>
+#include "ShaderCommon.h"
 
 fragment half4 fragmentAccent(Gargoyle::SimpleVertex in [[stage_in]],
-                                constant Gargoyle::MyColor& colors [[buffer(2)]]) {
-    // half4 color = half4(0.0, 1.0, 0.0, 1.0);
+							  constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
+  // half4 color = half4(0.0, 1.0, 0.0, 1.0);
+  float4 plane = planeData.plane;
 
-    return half4(
-            colors.color.x,
-            colors.color.y,
-            colors.color.z,
-            colors.color.w);
+  return half4(
+			   plane.x,
+			   plane.y,
+			   plane.z,
+			   plane.w);
 
 }

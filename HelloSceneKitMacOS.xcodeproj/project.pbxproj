@@ -34,6 +34,7 @@
 		42842D711D7825860075809C /* DepthShader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = DepthShader.metal; sourceTree = "<group>"; };
 		42842D731D7825910075809C /* HighlightIntersection.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = HighlightIntersection.metal; sourceTree = "<group>"; };
 		42842D751D7831970075809C /* IntersectPlane.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = IntersectPlane.metal; sourceTree = "<group>"; };
+		42842D8D1D78DA450075809C /* ShaderCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderCommon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +75,21 @@
 				42842D621D781C540075809C /* Assets.xcassets */,
 				42842D641D781C540075809C /* MainMenu.xib */,
 				42842D671D781C540075809C /* Info.plist */,
+				42842D8B1D78D9B10075809C /* Shaders */,
+			);
+			path = HelloSceneKitMacOS;
+			sourceTree = "<group>";
+		};
+		42842D8B1D78D9B10075809C /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				42842D8D1D78DA450075809C /* ShaderCommon.h */,
 				42842D6F1D781EE90075809C /* Shaders.metal */,
 				42842D711D7825860075809C /* DepthShader.metal */,
 				42842D751D7831970075809C /* IntersectPlane.metal */,
 				42842D731D7825910075809C /* HighlightIntersection.metal */,
 			);
-			path = HelloSceneKitMacOS;
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +313,7 @@
 				42842D6C1D781C540075809C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

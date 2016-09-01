@@ -13,6 +13,9 @@
 
 #ifdef __cplusplus
 
+using namespace metal;
+#include <SceneKit/scn_metal>
+
 namespace Gargoyle
 {
   struct SimpleVertex
@@ -21,11 +24,15 @@ namespace Gargoyle
   };
 
   typedef struct {
-	float3 position [[ attribute(SCNVertexSemanticPosition) ]];
+      simd::float3 position [[ attribute(SCNVertexSemanticPosition) ]];
   } MyVertexInput;
 
   struct MyColor {
       simd::float4 color;
+  };
+
+  struct PlaneData {
+      simd::float4 plane;
   };
   
 }
