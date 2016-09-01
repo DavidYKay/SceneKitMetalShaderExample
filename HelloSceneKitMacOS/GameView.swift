@@ -10,6 +10,7 @@ import SceneKit
 
 class GameView: SCNView {
     
+    
     override func mouseDown(theEvent: NSEvent) {
         /* Called when a mouse click occurs */
         

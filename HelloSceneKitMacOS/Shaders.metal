@@ -40,6 +40,8 @@ vertex SimpleVertex myVertex(MyVertexInput in [[ stage_in ]],
 fragment half4 myFragment(SimpleVertex in [[stage_in]])
 {
     half4 color;
+    
+//    in.position.x
     //color = half4(1.0, 0.0, 0.0, 1.0);
     color = half4(0.0, 1.0, 0.0, 1.0);
 

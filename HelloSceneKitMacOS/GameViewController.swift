@@ -41,6 +41,8 @@ class GameViewController: NSViewController {
         ambientLightNode.light!.color = NSColor.darkGrayColor()
         scene.rootNode.addChildNode(ambientLightNode)
         
+//        self.gameView!.renderingAPI = .Metal
+        
         // set the scene to the view
         self.gameView!.scene = scene
         
