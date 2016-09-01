@@ -9,6 +9,7 @@
 #include <metal_stdlib>
 using namespace metal;
 #include <SceneKit/scn_metal>
+#include "ShaderCommon.h"
 
 struct MyNodeBuffer {
     float4x4 modelTransform;
@@ -17,33 +18,17 @@ struct MyNodeBuffer {
     float4x4 modelViewProjectionTransform;
 };
 
-typedef struct {
-    float3 position [[ attribute(SCNVertexSemanticPosition) ]];
-} MyVertexInput;
-
-struct SimpleVertex
-{
-    float4 position [[position]];
-};
-
-
-vertex SimpleVertex myVertex(MyVertexInput in [[ stage_in ]],
+vertex Gargoyle::SimpleVertex myVertex(Gargoyle::MyVertexInput in [[ stage_in ]],
                              constant SCNSceneBuffer& scn_frame [[buffer(0)]],
                              constant MyNodeBuffer& scn_node [[buffer(1)]])
 {
-    SimpleVertex vert;
+    Gargoyle::SimpleVertex vert;
     vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
 
     return vert;
 }
 
-fragment half4 myFragment(SimpleVertex in [[stage_in]])
+fragment half4 myFragment(Gargoyle::SimpleVertex in [[stage_in]])
 {
-    half4 color;
-    
-//    in.position.x
-    //color = half4(1.0, 0.0, 0.0, 1.0);
-    color = half4(0.0, 1.0, 0.0, 1.0);
-
-    return color;
+    return half4(0.0, 1.0, 0.0, 1.0);
 }
