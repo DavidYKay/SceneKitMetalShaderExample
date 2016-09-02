@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42352C2A1D7A34C20051FE5C /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42352C291D7A34C20051FE5C /* SceneKit.framework */; };
+		42352C2C1D7A34C60051FE5C /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42352C2B1D7A34C60051FE5C /* Metal.framework */; };
+		42352C2E1D7A34C90051FE5C /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42352C2D1D7A34C90051FE5C /* ModelIO.framework */; };
+		42352C311D7A3E2A0051FE5C /* Mona.obj in Resources */ = {isa = PBXBuildFile; fileRef = 42352C301D7A3E2A0051FE5C /* Mona.obj */; };
 		42842D5B1D781C540075809C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42842D5A1D781C540075809C /* AppDelegate.swift */; };
 		42842D5D1D781C540075809C /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42842D5C1D781C540075809C /* GameView.swift */; };
 		42842D5F1D781C540075809C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42842D5E1D781C540075809C /* GameViewController.swift */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42352C291D7A34C20051FE5C /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		42352C2B1D7A34C60051FE5C /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		42352C2D1D7A34C90051FE5C /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
+		42352C301D7A3E2A0051FE5C /* Mona.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Mona.obj; path = Resources/3D/Mona.obj; sourceTree = "<group>"; };
 		42842D571D781C540075809C /* HelloSceneKitMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloSceneKitMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42842D5A1D781C540075809C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42842D5C1D781C540075809C /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -42,15 +50,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42352C2E1D7A34C90051FE5C /* ModelIO.framework in Frameworks */,
+				42352C2C1D7A34C60051FE5C /* Metal.framework in Frameworks */,
+				42352C2A1D7A34C20051FE5C /* SceneKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42352C2F1D7A34CC0051FE5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42352C2D1D7A34C90051FE5C /* ModelIO.framework */,
+				42352C2B1D7A34C60051FE5C /* Metal.framework */,
+				42352C291D7A34C20051FE5C /* SceneKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42352C321D7A3E2F0051FE5C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				42352C331D7A3E340051FE5C /* 3D */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		42352C331D7A3E340051FE5C /* 3D */ = {
+			isa = PBXGroup;
+			children = (
+				42352C301D7A3E2A0051FE5C /* Mona.obj */,
+			);
+			name = 3D;
+			sourceTree = "<group>";
+		};
 		42842D4E1D781C540075809C = {
 			isa = PBXGroup;
 			children = (
+				42352C321D7A3E2F0051FE5C /* Resources */,
+				42352C2F1D7A34CC0051FE5C /* Frameworks */,
 				42842D591D781C540075809C /* HelloSceneKitMacOS */,
 				42842D581D781C540075809C /* Products */,
 			);
@@ -150,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42352C311D7A3E2A0051FE5C /* Mona.obj in Resources */,
 				42842D631D781C540075809C /* Assets.xcassets in Resources */,
 				42842D611D781C540075809C /* art.scnassets in Resources */,
 				42842D661D781C540075809C /* MainMenu.xib in Resources */,
@@ -277,6 +317,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HelloSceneKitMacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = co.gargoyle.HelloSceneKitMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -289,6 +330,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HelloSceneKitMacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = co.gargoyle.HelloSceneKitMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

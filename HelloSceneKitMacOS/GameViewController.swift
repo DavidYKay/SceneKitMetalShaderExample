@@ -17,7 +17,7 @@ class GameViewController: NSViewController {
         super.awakeFromNib()
         
         // create a new scene
-        let scene = GameScene()
+        let scene = SceneFactory().makeBreastScene()
         
         // create and add a camera to the scene
         // let cameraNode = SCNNode()
