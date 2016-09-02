@@ -23,7 +23,8 @@ constant int in_front_of = 2;
 //enum PlanePosition { inside, behind, in_front_of };
 
 typedef struct {
-    float3 position [[ attribute(SCNVertexSemanticPosition) ]];
+  float3 position [[ attribute(SCNVertexSemanticPosition) ]];
+  float3 normal   [[ attribute(SCNVertexSemanticNormal) ]];
 } MyVertexInput;
 
 struct VertexInOut {
