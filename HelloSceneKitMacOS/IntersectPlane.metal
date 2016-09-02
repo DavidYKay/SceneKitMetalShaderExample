@@ -53,7 +53,8 @@ half4 planarDistanceToColor(float planarDistance) {
   if (abs(planarDistance) < TOUCHING_PLANE_PROXIMITY) {
 	return green;
   } else {
-	return half4(planarDistance, planarDistance, planarDistance, 1.0);
+	float d = abs(planarDistance);
+	return half4(d, d, d, 1.0);
   }
 }
 
