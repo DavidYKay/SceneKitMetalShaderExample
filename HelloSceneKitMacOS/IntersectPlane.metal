@@ -39,11 +39,23 @@ struct ColorInOut {
 float posToColor(float pos);
 int inFrontOfPlane(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
 float planeDistance(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
+half4 planarPositionToColor(int planePosition);
 
 float posToColor(float pos) {
   float f = pos / 255.0;
   return f;
   //return int(f) % 255;
+}
+
+half4 planarDistanceToColor(float planarDistance) {
+  return half4(planarDistance, planarDistance, planarDistance, 1.0);
+}
+
+half4 planarPositionToColor(int planePosition) {
+  return half4(planePosition == 0 ? 1.0 : 0.0,
+			   planePosition == 1 ? 1.0 : 0.0,
+			   planePosition == 2 ? 1.0 : 0.0,
+			   1.0);
 }
 
 float planeDistance(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData)
@@ -85,17 +97,8 @@ vertex Rastex vertexPlane(Gargoyle::MyVertexInput in [[ stage_in ]],
 
 fragment half4 fragmentPlane(Rastex in [[stage_in]],
 							 constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
-  
-  // float4 plane = planeData.plane;
-  //int p = in.relativeToPlane;
-  // return half4(p == 0 ? 1.0 : 0.0,
-  // 			   p == 1 ? 1.0 : 0.0,
-  // 			   p == 2 ? 1.0 : 0.0,
-  // 			   1.0);
-  
-  int prox = in.planeProximity;
-  return half4(prox, prox, prox, 1.0);
-  // return half4(plane.x, plane.y, plane.z, plane.w);
+  return planarDistanceToColor(in.planeProximity);
+  // return planarPositionToColor(in.relativeToPlane);
 
   // return half4(posToColor(in.worldCoordinates.x), posToColor(in.worldCoordinates.y), posToColor(in.worldCoordinates.z), 1.0);
   
