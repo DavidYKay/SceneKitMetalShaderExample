@@ -11,15 +11,16 @@ using namespace metal;
 #include <SceneKit/scn_metal>
 #include "ShaderCommon.h"
 
-// TODO: export data from vertex shader to fragment shader.
-//       see the fog example for more info.
-
 // enum class position_relativeToPlane { inside, behind, in_front_of };
+// enum PlanePosition { inside, behind, in_front_of };
+
+constant float TOUCHING_PLANE_PROXIMITY = 0.01;
 
 constant int inside = 0;
 constant int behind = 1;
 constant int in_front_of = 2;
-//enum PlanePosition { inside, behind, in_front_of };
+
+constant half4 green = half4(0, 1.0, 0, 1.0);
 
 struct Rastex {
   float4 cameraCoordinates [[position]];
@@ -40,6 +41,7 @@ float posToColor(float pos);
 int inFrontOfPlane(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
 float planeDistance(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
 half4 planarPositionToColor(int planePosition);
+half4 planarDistanceToColor(float planarDistance);
 
 float posToColor(float pos) {
   float f = pos / 255.0;
@@ -48,7 +50,11 @@ float posToColor(float pos) {
 }
 
 half4 planarDistanceToColor(float planarDistance) {
-  return half4(planarDistance, planarDistance, planarDistance, 1.0);
+  if (abs(planarDistance) < TOUCHING_PLANE_PROXIMITY) {
+	return green;
+  } else {
+	return half4(planarDistance, planarDistance, planarDistance, 1.0);
+  }
 }
 
 half4 planarPositionToColor(int planePosition) {

@@ -29,7 +29,7 @@ class GameScene: SCNScene {
         let program = SCNProgram()
         program.library = library
 
-        program.vertexFunctionName = "vertexPlane"
+        program.vertexFunctionName   = "vertexPlane"
         program.fragmentFunctionName = "fragmentPlane"
         
         let sphere = SCNSphere(radius: 0.25)
