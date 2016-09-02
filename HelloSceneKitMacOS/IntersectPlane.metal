@@ -14,7 +14,13 @@ using namespace metal;
 // TODO: export data from vertex shader to fragment shader.
 //       see the fog example for more info.
 
-enum class position_relative_to_plane { inside, behind, in_front_of };
+// enum class position_relative_to_plane { inside, behind, in_front_of };
+
+constant int inside = 0;
+constant int behind = 1;
+constant int in_front_of = 2;
+//enum Color { red, green, blue };
+//enum PlanePosition { inside, behind, in_front_of };
 
 typedef struct {
     float3 position [[ attribute(SCNVertexSemanticPosition) ]];
@@ -22,7 +28,7 @@ typedef struct {
 
 struct VertexInOut {
   float4 position [[position]];
-    position_relative_to_plane relative_to_plane;
+  int relative_to_plane;
 };
 
 struct ColorInOut {
@@ -80,18 +86,20 @@ vertex VertexInOut vertexPlane(Gargoyle::MyVertexInput in [[ stage_in ]],
   VertexInOut vert;
   vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
 
-    vert.relative_to_plane = position_relative_to_plane::behind;
+  vert.relative_to_plane = int(in.position.x) % 3;
 
   return vert;
 }
 
-fragment half4 fragmentPlane(Gargoyle::SimpleVertex in [[stage_in]],
-							  constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
+fragment half4 fragmentPlane(VertexInOut in [[stage_in]],
+							 constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
   // half4 color = half4(0.0, 1.0, 0.0, 1.0);
-  float4 plane = planeData.plane;
+//  float4 plane = planeData.plane;
 
-  return half4(plane.x,
-			   plane.y,
-			   plane.z,
-			   plane.w);
+  int p = in.relative_to_plane;
+  return half4(p == 0 ? 1.0 : 0.0,
+			   p == 1 ? 1.0 : 0.0,
+			   p == 2 ? 1.0 : 0.0,
+			   1.0);
+  //return half4(plane.x, plane.y, plane.z, plane.w);
 }
