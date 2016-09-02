@@ -25,6 +25,7 @@ namespace Gargoyle
 
   typedef struct {
       simd::float3 position [[ attribute(SCNVertexSemanticPosition) ]];
+      simd::float3 normal   [[ attribute(SCNVertexSemanticNormal) ]];
   } MyVertexInput;
 
   struct MyColor {
