@@ -34,6 +34,13 @@ namespace Gargoyle
   struct PlaneData {
       simd::float4 plane;
   };
+
+  struct MyNodeBuffer {
+	simd::float4x4 modelTransform;
+	simd::float4x4 modelViewTransform;
+	simd::float4x4 normalTransform;
+	simd::float4x4 modelViewProjectionTransform;
+  };
   
 }
 

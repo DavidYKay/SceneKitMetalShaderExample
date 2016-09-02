@@ -11,16 +11,10 @@ using namespace metal;
 #include <SceneKit/scn_metal>
 #include "ShaderCommon.h"
 
-struct MyNodeBuffer {
-    float4x4 modelTransform;
-    float4x4 modelViewTransform;
-    float4x4 normalTransform;
-    float4x4 modelViewProjectionTransform;
-};
 
 vertex Gargoyle::SimpleVertex myVertex(Gargoyle::MyVertexInput in [[ stage_in ]],
                              constant SCNSceneBuffer& scn_frame [[buffer(0)]],
-                             constant MyNodeBuffer& scn_node [[buffer(1)]])
+									   constant Gargoyle::MyNodeBuffer& scn_node [[buffer(1)]])
 {
     Gargoyle::SimpleVertex vert;
     vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
