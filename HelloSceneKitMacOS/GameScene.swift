@@ -32,15 +32,15 @@ class GameScene: SCNScene {
         program.vertexFunctionName = "vertexPlane"
         program.fragmentFunctionName = "fragmentPlane"
         
-        let sphere = SCNSphere(radius: 100.0)
+        let sphere = SCNSphere(radius: 0.25)
         //let sphere = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
         
         var planeData = PlaneData(
             //plane: vector_float4(1,0,0,1)
             //plane: vector_float4(0,1,0,1)
             //plane: vector_float4(0,0,1,1)
-            plane: vector_float4(0, 0.7071, -0.7071, 0)
-            // plane: vector_float4(1,2,-4,7)
+            //plane: vector_float4(0, 0.7071, -0.7071, 0)
+             plane: vector_float4(1,2,-4,7)
         )
         let myData = NSData(bytes:&planeData, length:sizeof(PlaneData))
         sphere.materials.first!.setValue(myData, forKey: "planeData")

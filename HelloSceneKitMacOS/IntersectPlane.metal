@@ -14,7 +14,7 @@ using namespace metal;
 // TODO: export data from vertex shader to fragment shader.
 //       see the fog example for more info.
 
-// enum class position_relative_to_plane { inside, behind, in_front_of };
+// enum class position_relativeToPlane { inside, behind, in_front_of };
 
 constant int inside = 0;
 constant int behind = 1;
@@ -24,7 +24,8 @@ constant int in_front_of = 2;
 struct Rastex {
   float4 cameraCoordinates [[position]];
   float4 worldCoordinates;
-  int relative_to_plane;
+  int relativeToPlane;
+  float planeProximity;
 };
 
 struct ColorInOut {
@@ -37,6 +38,7 @@ struct ColorInOut {
 
 float posToColor(float pos);
 int inFrontOfPlane(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
+float planeDistance(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData);
 
 float posToColor(float pos) {
   float f = pos / 255.0;
@@ -44,18 +46,26 @@ float posToColor(float pos) {
   //return int(f) % 255;
 }
 
-int inFrontOfPlane(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData)
+float planeDistance(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData)
 {
   float4 plane = planeData.plane;
   float3 point = vert.position;
 	
   float result = (plane.x * point.x) + (plane.y * point.y) + (plane.z * point.z);
+  return result;
+}
+
+int inFrontOfPlane(Gargoyle::MyVertexInput vert, constant Gargoyle::PlaneData& planeData)
+{
+  float result = planeDistance(vert, planeData);
+  float4 plane = planeData.plane;
+  
   if (result > plane.w) {
-	  return behind;
-	} else if (result < plane.w) {
-	  return in_front_of;
-	} else {
-	return inside;
+  	  return behind;
+  	} else if (result < plane.w) {
+  	  return in_front_of;
+  	} else {
+  	return inside;
   }
 }
 
@@ -67,7 +77,8 @@ vertex Rastex vertexPlane(Gargoyle::MyVertexInput in [[ stage_in ]],
   Rastex vert;
   vert.worldCoordinates = float4(in.position.x, in.position.y, in.position.z, 1.0);
   vert.cameraCoordinates = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
-  vert.relative_to_plane = inFrontOfPlane(in, planeData);
+  vert.relativeToPlane = inFrontOfPlane(in, planeData);
+  vert.planeProximity = planeDistance(in, planeData);
 
   return vert;
 }
@@ -76,11 +87,14 @@ fragment half4 fragmentPlane(Rastex in [[stage_in]],
 							 constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
   
   // float4 plane = planeData.plane;
-  int p = in.relative_to_plane;
-  return half4(p == 0 ? 1.0 : 0.0,
-  			   p == 1 ? 1.0 : 0.0,
-  			   p == 2 ? 1.0 : 0.0,
-  			   1.0);
+  //int p = in.relativeToPlane;
+  // return half4(p == 0 ? 1.0 : 0.0,
+  // 			   p == 1 ? 1.0 : 0.0,
+  // 			   p == 2 ? 1.0 : 0.0,
+  // 			   1.0);
+  
+  int prox = in.planeProximity;
+  return half4(prox, prox, prox, 1.0);
   // return half4(plane.x, plane.y, plane.z, plane.w);
 
   // return half4(posToColor(in.worldCoordinates.x), posToColor(in.worldCoordinates.y), posToColor(in.worldCoordinates.z), 1.0);
