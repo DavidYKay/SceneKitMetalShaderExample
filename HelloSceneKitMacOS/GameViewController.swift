@@ -50,7 +50,7 @@ class GameViewController: NSViewController {
         self.gameView!.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        //self.gameView!.showsStatistics = true
+        self.gameView!.showsStatistics = true
         
         // configure the view
         self.gameView!.backgroundColor = NSColor.blackColor()

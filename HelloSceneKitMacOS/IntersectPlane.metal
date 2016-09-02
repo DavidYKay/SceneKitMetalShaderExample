@@ -27,7 +27,8 @@ typedef struct {
 } MyVertexInput;
 
 struct VertexInOut {
-  float4 position [[position]];
+  float4 cameraCoordinates [[position]];
+  float4 worldCoordinates;
   int relative_to_plane;
 };
 
@@ -78,28 +79,51 @@ struct ColorInOut {
 
 vertex VertexInOut vertexPlane(Gargoyle::MyVertexInput in [[ stage_in ]],
 							   constant SCNSceneBuffer& scn_frame [[buffer(0)]],
-							   constant Gargoyle::MyNodeBuffer& scn_node [[buffer(1)]]
+							   constant Gargoyle::MyNodeBuffer& scn_node [[buffer(1)]],
+							   constant Gargoyle::PlaneData& planeData [[buffer(2)]]
 // device packed_float3* vertices [[ buffer(1) ]],
 // device packed_float3* normals [[ buffer(2) ]],
 							)
 {
   VertexInOut vert;
-  vert.position = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
+  vert.worldCoordinates = float4(in.position.x,
+								 in.position.y,
+								 in.position.z,
+								 1.0);
+  vert.cameraCoordinates = scn_node.modelViewProjectionTransform * float4(in.position, 1.0);
 
-  vert.relative_to_plane = int(in.position.x) % 3;
+  float4 plane = planeData.plane;
+
+  //vert.relative_to_plane = int(in.position.z) % 3;
+  vert.relative_to_plane = int(in.position.x) > 5 ? 0 : 1;
+  //vert.relative_to_plane = int(in.position.x + 0.5) > 0 ? 0 : 1;
 
   return vert;
+}
+
+float posToColor(float pos);
+float posToColor(float pos) {
+  float f = pos / 255.0;
+  return f;
+  //return int(f) % 255;
 }
 
 fragment half4 fragmentPlane(VertexInOut in [[stage_in]],
 							 constant Gargoyle::PlaneData& planeData [[buffer(2)]]) {
   // half4 color = half4(0.0, 1.0, 0.0, 1.0);
-//  float4 plane = planeData.plane;
+//    float4 plane = planeData.plane;
+//  int p = in.relative_to_plane;
+  // return half4(p == 0 ? 1.0 : 0.0,
+  // 			   p == 1 ? 1.0 : 0.0,
+  // 			   p == 2 ? 1.0 : 0.0,
+  // 			   1.0);
+//  return half4(plane.x, plane.y, plane.z, plane.w);
 
-  int p = in.relative_to_plane;
-  return half4(p == 0 ? 1.0 : 0.0,
-			   p == 1 ? 1.0 : 0.0,
-			   p == 2 ? 1.0 : 0.0,
-			   1.0);
-  //return half4(plane.x, plane.y, plane.z, plane.w);
+  return half4(posToColor(in.worldCoordinates.x), posToColor(in.worldCoordinates.y), posToColor(in.worldCoordinates.z), 1.0);
+  //return half4(posToColor(in.cameraCoordinates.x), posToColor(in.cameraCoordinates.y), posToColor(in.cameraCoordinates.z), 1.0);
+  
+  // return half4((in.position.x / 255.0) % 1,
+  // 			   (in.position.y / 255.0) % 1,
+  // 			   (in.position.z / 255.0) % 1,
+  // 			   1.0);
 }
