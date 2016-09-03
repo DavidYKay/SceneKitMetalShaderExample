@@ -38,12 +38,12 @@ class SceneFactory {
         let monaUrl = FilePather().urlForFile("Mona", filetype: "obj")
         let scene = makeObjScene(monaUrl)
         let rootNode = scene.rootNode
-        setShaderProgramAndData(rootNode.geometry!.materials.first!)
+        setShaderProgramAndData(rootNode.childNodes.first!.geometry!.materials.first!)
         return scene
     }
 
     func makeBreastScene() -> SCNScene {
-        return makeOriginalScene()
+        return makeNewScene()
     }
 }
 
